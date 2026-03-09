@@ -1,76 +1,136 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <title>test</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>rouaa老師的簡易計算機</title>
+    <meta charset="UTF-8">
+    <title>Rouaa 老師的可愛計算機</title>
     <style>
-        input[type="button"] {
-            width: 50px;
-            height: 50px;
+        /* 整體背景設定 */
+        body {
+            background-color: #fff5f7; /* 極淺粉色背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Microsoft JhengHei", cursive;
         }
+
+        /* 計算機外殼 */
+        .calculator {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 30px; /* 超圓潤邊角 */
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5); /* 粉色發光陰影 */
+            border: 4px solid #ffb6c1;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff8fa3;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* 顯示螢幕 */
         input[type="text"] {
-            width: 200px;
-            height: 50px;
+            width: 220px;
+            height: 60px;
+            border: 2px solid #ffe4e1;
+            background-color: #fffafa;
+            border-radius: 15px;
+            text-align: right;
+            padding: 0 15px;
+            font-size: 24px;
+            color: #ff8fa3;
+            margin-bottom: 20px;
+            outline: none;
         }
+
+        /* 按鈕基本樣式 */
+        input[type="button"] {
+            width: 55px;
+            height: 55px;
+            margin: 5px;
+            border: none;
+            border-radius: 15px; /* 圓角按鈕 */
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s; /* 動畫效果 */
+            background-color: #ffe4e1;
+            color: #d87093;
+        }
+
+        /* 滑鼠滑過按鈕 */
+        input[type="button"]:hover {
+            background-color: #ffb6c1;
+            color: white;
+            transform: translateY(-2px); /* 輕微浮起 */
+        }
+
+        /* 按下去的感覺 */
+        input[type="button"]:active {
+            transform: translateY(1px);
+        }
+
+        /* 特殊按鈕顏色 (等於與清除) */
+        .btn-operator { background-color: #ffd1dc; }
+        .btn-clear { background-color: #e0fbfc; color: #457b9d; }
+        .btn-equal { background-color: #ff8fa3; color: white; }
+        
     </style>
 </head>
 <body>
-    <h1>rouaa老師的簡易計算機</h1>
-  <hr>
-   <hr>
-     <hr>
-    <input type="text" id="display" readonly>
-    <br>
-    <input type="button" value="1" onclick="appendToDisplay('1')">
-    <input type="button" value="2" onclick="appendToDisplay('2')">
-    <input type="button" value="3" onclick="appendToDisplay('3')">
-    <input type="button" value="+" onclick="appendToDisplay('+')">
-    <br>
-    <input type="button" value="4" onclick="appendToDisplay('4')">
-    <input type="button" value="5" onclick="appendToDisplay('5')">
-    <input type="button" value="6" onclick="appendToDisplay('6')">
-    <input type="button" value="-" onclick="appendToDisplay('-')">
-    <br>
-    <input type="button" value="7" onclick="appendToDisplay('7')">
-    <input type="button" value="8" onclick="appendToDisplay('8')">
-    <input type="button" value="9" onclick="appendToDisplay('9')">
-    <input type="button" value="*" onclick="appendToDisplay('*')">
-    <br>
-    <input type="button" value="0" onclick="appendToDisplay('0')">
-    <input type="button" value="C" onclick="clearDisplay()">
-    <input type="button" value="=" onclick="calculate()">
-    <input type="button" value="/" onclick="appendToDisplay('/')">
-    <br>
+
+    <div class="calculator">
+        <h1>🍓 Rouaa 老師的甜點機</h1>
+        
+        <input type="text" id="display" readonly placeholder="0">
+        <br>
+        
+        <input type="button" value="1" onclick="appendToDisplay('1')">
+        <input type="button" value="2" onclick="appendToDisplay('2')">
+        <input type="button" value="3" onclick="appendToDisplay('3')">
+        <input type="button" value="+" class="btn-operator" onclick="appendToDisplay('+')">
+        <br>
+        
+        <input type="button" value="4" onclick="appendToDisplay('4')">
+        <input type="button" value="5" onclick="appendToDisplay('5')">
+        <input type="button" value="6" onclick="appendToDisplay('6')">
+        <input type="button" value="-" class="btn-operator" onclick="appendToDisplay('-')">
+        <br>
+        
+        <input type="button" value="7" onclick="appendToDisplay('7')">
+        <input type="button" value="8" onclick="appendToDisplay('8')">
+        <input type="button" value="9" onclick="appendToDisplay('9')">
+        <input type="button" value="*" class="btn-operator" onclick="appendToDisplay('*')">
+        <br>
+        
+        <input type="button" value="0" onclick="appendToDisplay('0')">
+        <input type="button" value="C" class="btn-clear" onclick="clearDisplay()">
+        <input type="button" value="=" class="btn-equal" onclick="calculate()">
+        <input type="button" value="/" class="btn-operator" onclick="appendToDisplay('/')">
+    </div>
+
     <script>
+        const display = document.getElementById("display");
+
         function appendToDisplay(value) {
-            document.getElementById("display").value += value;
+            display.value += value;
         }
 
         function clearDisplay() {
-            document.getElementById("display").value = '';
+            display.value = '';
         }
 
         function calculate() {
-            var expression = document.getElementById("display").value;
             try {
-                document.getElementById("display").value = eval(expression);
+                // 使用 eval 需注意安全，但在簡單練習中是可以的
+                display.value = eval(display.value);
             } catch (e) {
-                document.getElementById("display").value = 'Error';
+                display.value = 'Oops!';
             }
         }
     </script>
-</body>
-</html>
-<!-- partial -->
-  
 </body>
 </html>
